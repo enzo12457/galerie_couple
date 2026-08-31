@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2022</title>
+    <meta name="description" content="Ce sont les premiers moments où nos regards se sont croisés et où tout a commencé à prendre une forme douce et irrésistible." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="story-body">
+    <div class="story-page-shell">
+      <header class="story-header">
+        <a class="story-back" href="index.html">← Retour</a>
+        <div class="story-title-wrap">
+          <span class="story-tag">2022</span>
+          <h1>Les premiers jours</h1>
+        </div>
+      </header>
+
+      <main>
+        <section class="story-hero">
+          <img src="photo_2022/IMG_4521.JPG" alt="Photo des premiers jours du couple" />
+          <div class="story-copy">
+            <p>Ce sont les premiers moments où nos regards se sont croisés et où tout a commencé.</p>
+            <p>Des balades simples, des repas simples, des sourires et de la joie.</p>
+          </div>
+        </section>
+
+        <section class="story-gallery" aria-label="Galerie Les premiers jours">
+          <figure class="story-card">
+            <img src="photo_2022/IMG_4521.JPG" alt="Les premiers jours 1" loading="lazy" />
+          </figure>
+          <figure class="story-card">
+            <img src="photo_2022/IMG_4624.PNG" alt="Les premiers jours 2" loading="lazy" />
+          </figure>
+          <figure class="story-card">
+            <img src="photo_2022/IMG_4625.PNG" alt="Les premiers jours 3" loading="lazy" />
+          </figure>
+          <figure class="story-card">
+            <img src="photo_2022/IMG_4697.JPG" alt="Les premiers jours 4" loading="lazy" />
+          </figure>
+          <figure class="story-card">
+            <img src="photo_2022/IMG_4699.PNG" alt="Les premiers jours 5" loading="lazy" />
+          </figure>
+          <figure class="story-card">
+            <img src="photo_2022/IMG_4732.JPG" alt="Les premiers jours 6" loading="lazy" />
+          </figure>
+          <figure class="story-card">
+            <img src="photo_2022/IMG_4735.JPG" alt="Les premiers jours 7" loading="lazy" />
+          </figure>
+          <figure class="story-card">
+            <img src="photo_2022/IMG_4793.JPG" alt="Les premiers jours 8" loading="lazy" />
+          </figure>
+          <figure class="story-card">
+            <img src="photo_2022/IMG_4814.PNG" alt="Les premiers jours 9" loading="lazy" />
+          </figure>
+          <figure class="story-card">
+            <img src="photo_2022/IMG_4911.JPG" alt="Les premiers jours 10" loading="lazy" />
+          </figure>
+          <figure class="story-card">
+            <img src="photo_2022/IMG_5589.jpg" alt="Les premiers jours 11" loading="lazy" />
+          </figure>
+          <figure class="story-card">
+            <img src="photo_2022/IMG_5590.jpg" alt="Les premiers jours 12" loading="lazy" />
+          </figure>
+          <figure class="story-card">
+            <img src="photo_2022/IMG_5804.jpg" alt="Les premiers jours 13" loading="lazy" />
+          </figure>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      (() => {
+        document.querySelectorAll('.lightbox, #lightbox').forEach((el) => el.remove());
+
+        const modal = document.createElement('div');
+        modal.id = 'fullImageModal';
+        modal.setAttribute('aria-hidden', 'true');
+        modal.style.position = 'fixed';
+        modal.style.inset = '0';
+        modal.style.display = 'none';
+        modal.style.alignItems = 'center';
+        modal.style.justifyContent = 'center';
+        modal.style.padding = '32px';
+        modal.style.background = 'rgba(10, 8, 14, 0.9)';
+        modal.style.zIndex = '2147483647';
+        modal.style.cursor = 'zoom-out';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.type = 'button';
+        closeBtn.setAttribute('aria-label', 'Fermer');
+        closeBtn.textContent = '×';
+        closeBtn.style.position = 'absolute';
+        closeBtn.style.top = '20px';
+        closeBtn.style.right = '20px';
+        closeBtn.style.width = '46px';
+        closeBtn.style.height = '46px';
+        closeBtn.style.border = '0';
+        closeBtn.style.borderRadius = '50%';
+        closeBtn.style.background = 'rgba(255,255,255,0.12)';
+        closeBtn.style.color = '#fff';
+        closeBtn.style.fontSize = '2rem';
+        closeBtn.style.cursor = 'pointer';
+
+        const img = document.createElement('img');
+        img.alt = '';
+        img.style.maxWidth = '92vw';
+        img.style.maxHeight = '90vh';
+        img.style.objectFit = 'contain';
+        img.style.borderRadius = '20px';
+        img.style.boxShadow = '0 30px 70px rgba(0,0,0,0.45)';
+        img.style.background = 'rgba(255,255,255,0.04)';
+
+        modal.appendChild(closeBtn);
+        modal.appendChild(img);
+        document.body.appendChild(modal);
+
+        let modalScrollY = 0;
+
+        const closeModal = () => {
+          modal.classList.remove('is-open');
+          modal.style.display = 'none';
+          modal.style.pointerEvents = 'none';
+          modal.setAttribute('aria-hidden', 'true');
+          document.body.classList.remove('lightbox-open');
+          document.documentElement.classList.remove('lightbox-open');
+          window.scrollTo({ top: modalScrollY, left: 0, behavior: 'auto' });
+        };
+
+        document.querySelectorAll('img').forEach((image) => {
+          if (image.closest('#fullImageModal')) return;
+          image.style.cursor = 'zoom-in';
+          image.addEventListener('click', () => {
+            const src = image.getAttribute('src');
+            if (!src) return;
+            modalScrollY = window.scrollY || window.pageYOffset || 0;
+            img.src = src;
+            img.alt = image.getAttribute('alt') || '';
+            modal.classList.add('is-open');
+            modal.style.display = 'flex';
+            modal.style.pointerEvents = 'auto';
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('lightbox-open');
+            document.documentElement.classList.add('lightbox-open');
+          });
+        });
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (event) => {
+          if (event.target === modal) closeModal();
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') closeModal();
+        });
+      })();
+    </script>
+  </body>
+</html>
